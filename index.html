@@ -3,10 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather App</title>
+    <title>Document</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="javascript.js" defer></script>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
   </head>
   <body>
+    <div id="weather-main">
+      <h1 id="location">Sydney</h1>
+      <div class="date-time">
+        <p id="date">Wednesday, 22nd Nov '23</p>
+        <p id="time">1:42 PM</p>
+      </div>
+      <div class="temp-info">
+        <div class="temp-main">
+          <h1 id="temp">25 °C</h1>
+          <div id="temp-unit-toggle">to °F</div>
+        </div>
+        <div class="temp-secondary">
+          <img src="//cdn.weatherapi.com/weather/64x64/day/116.png" alt="" />
+          <h2 id="temp-desc">Broken Clouds</h2>
+        </div>
+      </div>
+      <div id="search-bar">
+        <form action="#">
+          <label for="search-input"></label>
+          <input type="text" id="search-input" placeholder="Search location" />
+        </form>
+        <button id="search-button">
+          <span class="material-symbols-outlined"> search </span>
+        </button>
+      </div>
+    </div>
   </body>
 </html>
