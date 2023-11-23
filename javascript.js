@@ -1,63 +1,66 @@
-let locationSelect = "sydney";
-
-async function getCurrentWeather() {
+async function getCurrentWeather(loc) {
   const responseCurrent = await fetch(
-    `https://api.weatherapi.com/v1/current.json?key=5d4c1b2bf46e4f9583d60621232011&q=${locationSelect}`
+    `https://api.weatherapi.com/v1/current.json?key=5d4c1b2bf46e4f9583d60621232011&q=${loc}`
   );
 
   // CURRENT API
 
   const weatherCurrent = await responseCurrent.json();
 
-  // current weather Object from WeatherAPI
-  console.log(weatherCurrent);
-
   // Weather Description
-  console.log(weatherCurrent.current.condition.text);
+  const weatherDesc = weatherCurrent.current.condition.text;
+  document.querySelector("#temp-desc").textContent = weatherDesc;
 
   // Location Info
-  console.log(weatherCurrent.location.name);
+  const locationName = weatherCurrent.location.name;
+  document.querySelector("#location").textContent = locationName;
 
   // Date info
   const date = new Date(weatherCurrent.location.localtime);
 
   // Formatted Date
-  console.log(
-    date.toLocaleDateString("en-gb", {
+  document.querySelector("#date").textContent = date.toLocaleDateString(
+    "en-gb",
+    {
       weekday: "long",
       year: "numeric",
       month: "short",
       day: "numeric",
-    })
+    }
   );
 
   // Time info from Date
   const shortTime = new Intl.DateTimeFormat("en", {
     timeStyle: "short",
   });
-  console.log(shortTime.format(date)); // "1:31 PM"
 
-  // Current Weather (C)
-  console.log(weatherCurrent.current.temp_c);
+  document.querySelector("#time").textContent = shortTime.format(date); // "1:31 PM"
 
-  // Current Weather (F)
-  console.log(weatherCurrent.current.temp_f);
+  // Current Weather
+  if (document.querySelector("#temp-unit-toggle").className === "c") {
+    // Current Weather (°C)
+    document.querySelector("#temp").textContent = `${weatherCurrent.current.temp_c} °C`;
+  } else {
+    // Current Weather (°F)
+    document.querySelector("#temp").textContent = `${weatherCurrent.current.temp_f} °F`;
+  }
 
   // Current Weather Icon
-  const createWeatherIcon = document.createElement("img");
-  createWeatherIcon.setAttribute("src", weatherCurrent.current.condition.icon);
-  createWeatherIcon.setAttribute("width", "64");
-  createWeatherIcon.setAttribute("height", "64");
-  document.body.appendChild(createWeatherIcon);
-  console.log(weatherCurrent.current.condition.icon);
+  const selectWeatherIcon = document.querySelector("#main-icon");
+  selectWeatherIcon.src = weatherCurrent.current.condition.icon;
 
-  // Feels Like (C)
-  console.log(weatherCurrent.current.feelslike_c);
-
-  // Feels Like (F)
-  console.log(weatherCurrent.current.feelslike_f);
+  // Feels Like 
+  if (document.querySelector("#temp-unit-toggle").className === "c") {
+    // Feels Like (°C)
+    document.querySelector("#feelslike").textContent = `${weatherCurrent.current.feelslike_c} °C`;
+  } else {
+    // Feels Like (°F)
+    document.querySelector("#feelslike").textContent = `${weatherCurrent.current.feelslike_f} <span class="unit">°F</span>`;
+  }
 
   // Humidity
+  // const humidity = weatherCurrent.current.humidity;
+  // document.querySelector("#temp-desc").textContent = weatherDesc;
   console.log(`${weatherCurrent.current.humidity} %`);
 
   // Wind speed (kph)
@@ -67,9 +70,9 @@ async function getCurrentWeather() {
   console.log(weatherCurrent.current.wind_mph);
 }
 
-async function getForecastWeather() {
+async function getForecastWeather(loc) {
   const responseForecast = await fetch(
-    `https://api.weatherapi.com/v1/forecast.json?key=5d4c1b2bf46e4f9583d60621232011&q=${locationSelect}`
+    `https://api.weatherapi.com/v1/forecast.json?key=5d4c1b2bf46e4f9583d60621232011&q=${loc}`
   );
 
   // FORECAST API
@@ -101,27 +104,48 @@ async function getForecastWeather() {
   });
 
   // Current Hour 24H
-  console.log(shortHour.format(date)); // "14"
+  console.log(date.getHours()); // "14" for  or "2"
 
   // Current Hour Name 12H
   console.log(longHour.format(date)); // "2 pm"
 
   // Hourly Temp (C)
   console.log(
-    weatherForecast.forecast.forecastday[0].hour[shortHour.format(date)].temp_c
+    weatherForecast.forecast.forecastday[0].hour[date.getHours()].temp_c
   );
 
   // Hourly Temp (F)
   console.log(
-    weatherForecast.forecast.forecastday[0].hour[shortHour.format(date)].temp_f
+    weatherForecast.forecast.forecastday[0].hour[date.getHours()].temp_f
   );
 
   // Hourly Weather Icon
   console.log(
-    weatherForecast.forecast.forecastday[0].hour[shortHour.format(date)]
-      .condition.icon
+    weatherForecast.forecast.forecastday[0].hour[date.getHours()].condition.icon
   );
 }
 
-// getCurrentWeather();
-// getForecastWeather();
+const searchBtn = document.querySelector("#search-button");
+
+searchBtn.addEventListener("click", () => {
+  let searchTerm = document.querySelector("#search-input").value;
+  render(searchTerm);
+});
+
+async function render(cb) {
+  await getCurrentWeather(cb);
+  await getForecastWeather(cb);
+  console.log("Render finished!");
+}
+
+selectChangeUnits = document.querySelector("#temp-unit-toggle");
+selectChangeUnits.addEventListener("click", () => {
+  if (selectChangeUnits.className === "c") {
+    selectChangeUnits.className = "f";
+    selectChangeUnits.textContent = "to °C";
+  } else {
+    selectChangeUnits.className = "c";
+    selectChangeUnits.textContent = "to °F";
+  }
+  render(document.querySelector("#location").textContent);
+});

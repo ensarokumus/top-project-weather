@@ -12,30 +12,137 @@
     />
   </head>
   <body>
-    <div id="weather-main">
-      <h1 id="location">Sydney</h1>
-      <div class="date-time">
-        <p id="date">Wednesday, 22nd Nov '23</p>
-        <p id="time">1:42 PM</p>
-      </div>
-      <div class="temp-info">
-        <div class="temp-main">
-          <h1 id="temp">25 °C</h1>
-          <div id="temp-unit-toggle">to °F</div>
+    <main>
+      <div id="weather-main">
+        <h1 id="location">Sydney</h1>
+        <div class="date-time">
+          <p id="date">Wednesday, 22nd Nov '23</p>
+          <p id="time">1:42 PM</p>
         </div>
-        <div class="temp-secondary">
-          <img src="//cdn.weatherapi.com/weather/64x64/day/116.png" alt="" />
-          <h2 id="temp-desc">Broken Clouds</h2>
+        <div class="temp-info">
+          <div class="temp-main">
+            <h1 id="temp">25 °C</h1>
+            <div id="temp-unit-toggle" class="c">to °F</div>
+          </div>
+          <div class="temp-secondary">
+            <img
+              id="main-icon"
+              src="//cdn.weatherapi.com/weather/64x64/day/116.png"
+              alt=""
+            />
+            <h2 id="temp-desc">Broken Clouds</h2>
+          </div>
+        </div>
+        <div id="search-bar">
+          <form action="#">
+            <label for="search-input"></label>
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search location"
+            />
+            <button id="search-button">
+              <span class="material-symbols-outlined search"> search </span>
+            </button>
+          </form>
         </div>
       </div>
-      <div id="search-bar">
-        <form action="#">
-          <label for="search-input"></label>
-          <input type="text" id="search-input" placeholder="Search location" />
-        </form>
-        <button id="search-button">
-          <span class="material-symbols-outlined"> search </span>
-        </button>
+      <div id="weather-details">
+        <div class="widget">
+          <span class="material-symbols-outlined widget-icon">
+            device_thermostat
+          </span>
+          <div class="widget-text">
+            <p>Feels Like</p>
+            <h3 id="feelslike">22 <span class="unit">°C</span></h3>
+          </div>
+        </div>
+        <div class="widget">
+          <span class="material-symbols-outlined widget-icon">
+            humidity_percentage
+          </span>
+          <div class="widget-text">
+            <p>Humidity</p>
+            <h3 id="feelslike">66 <span class="unit">%</span></h3>
+          </div>
+        </div>
+        <div class="widget">
+          <span class="material-symbols-outlined widget-icon"> rainy </span>
+          <div class="widget-text">
+            <p>Rain Chance</p>
+            <h3 id="feelslike">12 <span class="unit">%</span></h3>
+          </div>
+        </div>
+        <div class="widget">
+          <span class="material-symbols-outlined widget-icon"> rainy </span>
+          <div class="widget-text">
+            <p>Wind Speed</p>
+            <h3 id="feelslike">22.2 <span class="unit">km/h</span></h3>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div class="forecast">
+      <div class="forecast-hourly" id="current-plus-1">
+        <div class="hour-name">1pm</div>
+        <div class="hour-temp">21 °C</div>
+        <div class="hour-icon">
+          <img
+              id="hourly-icon-1"
+              class="hourly-icon"
+              src="//cdn.weatherapi.com/weather/64x64/day/116.png"
+              alt=""
+            />
+        </div>
+      </div>
+      <div class="forecast-hourly" id="current-plus-2">
+        <div class="hour-name">2pm</div>
+        <div class="hour-temp">21 °C</div>
+        <div class="hour-icon">
+          <img
+              id="hourly-icon-2"
+              class="hourly-icon"
+              src="//cdn.weatherapi.com/weather/64x64/day/116.png"
+              alt=""
+            />
+        </div>
+      </div>
+      <div class="forecast-hourly" id="current-plus-3">
+        <div class="hour-name">3pm</div>
+        <div class="hour-temp">22 °C</div>
+        <div class="hour-icon">
+          <img
+              id="hourly-icon-3"
+              class="hourly-icon"
+              src="//cdn.weatherapi.com/weather/64x64/day/116.png"
+              alt=""
+            />
+        </div>
+      </div>
+      <div class="forecast-hourly" id="current-plus-4">
+        <div class="hour-name">4pm</div>
+        <div class="hour-temp">23 °C</div>
+        <div class="hour-icon">
+          <img
+              id="hourly-icon-4"
+              class="hourly-icon"
+              src="//cdn.weatherapi.com/weather/64x64/day/116.png"
+              alt=""
+            />
+        </div>
+      </div>
+      <div class="forecast-hourly" id="current-plus-5">
+        <div class="hour-name">5pm</div>
+        <div class="hour-temp">25 °C</div>
+        <div class="hour-icon">
+          <img
+              id="hourly-icon-5"
+              class="hourly-icon"
+              src="//cdn.weatherapi.com/weather/64x64/day/116.png"
+              alt=""
+            />
+        </div>
+      </div>
       </div>
     </div>
   </body>
