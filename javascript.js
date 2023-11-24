@@ -233,18 +233,19 @@ searchBtn.addEventListener("click", () => {
   let searchTerm = document.querySelector("#search-input").value;
   render(searchTerm);
   document.querySelector("#search-input").value = "";
+  const errorMessage = document.querySelector(".error");
+  errorMessage.style.display = "none";
 });
 
-async function render(cb) {
-  getCurrentWeather(cb).catch(err => {
-    const para = document.createElement("p");
-    para.innerHTML = 'Location not found. <br> E.g.: "City", "City, State" or "City, Country".'
-    para.className = "error"
-    document.querySelector("#weather-main").appendChild(para);
+function render(cb) {
+  getCurrentWeather(cb).catch((err) => {
+    const errorMessage = document.querySelector(".error");
+    errorMessage.style.display = "block";
   });
-  getForecastWeather(cb).catch(err => {
-    console.log(err)
-  });;
+  getForecastWeather(cb).catch((err) => {
+    const errorMessage = document.querySelector(".error");
+    errorMessage.style.display = "block";
+  });
   document.querySelector("main").style.display = "flex";
   document.querySelector(".forecast").style.display = "flex";
 }

@@ -114,6 +114,7 @@ form {
 }
 
 .error {
+  display: none;
   font-size: 0.7rem;
   color: white;
 }
