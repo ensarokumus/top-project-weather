@@ -27,7 +27,7 @@ body {
 }
 
 main {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 2rem;
@@ -113,6 +113,11 @@ form {
   border: none;
 }
 
+.error {
+  font-size: 0.7rem;
+  color: white;
+}
+
 #weather-details {
   display: flex;
   flex-direction: column;
@@ -147,7 +152,7 @@ form {
 }
 
 .forecast {
-  display: flex;
+  display: none;
   justify-content: space-between;
 }
 
@@ -164,11 +169,11 @@ form {
 }
 
 .hour-temp {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 900;
 }
 
-.hourly-icon {
+.hour-icon {
   width: 3rem;
   height: 3rem;
 }
